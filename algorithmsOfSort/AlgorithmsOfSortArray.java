@@ -15,4 +15,20 @@ public class AlgorithmsOfSortArray {
             }
         }
     }
+
+    public static void selectionSort (int [] array) {
+        if (array == null) throw new IllegalArgumentException();
+        if (array.length == 1) return;
+        for (int i = 0; i < array.length; i++) {
+            int index = i;
+            for (int j = i + 1; j < array.length; j++) {
+                if (array[index] > array[j]) {
+                    index = j;
+                }
+            }
+            int tmp = array[i];
+            array[i] = array[index];
+            array[index] = tmp;
+        }
+    }
 }
