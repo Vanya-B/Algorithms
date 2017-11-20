@@ -45,4 +45,37 @@ public class AlgorithmsOfSortArray {
             }
         }
     }
+
+    public static int [] quickSort (int [] array) {
+        if (array == null) throw new IllegalArgumentException();
+        if (array.length <= 1) return array;
+        int pivotIndex = array.length/2;
+        int pivot = array[pivotIndex];
+        int [] newArray = new int[array.length];
+        int firstIndex = 0;
+        int lastIndex = array.length - 1;
+        for (int i = array.length - 1; i >= 0; i--) {
+            if (pivotIndex != i) {
+                if (array[i] < pivot) {
+                    newArray[firstIndex++] = array[i];
+                }
+                if (array[i] >= pivot) {
+                    newArray[lastIndex--] = array[i];
+                }
+            }
+        }
+        newArray[firstIndex] = pivot;
+        pivotIndex = firstIndex;
+        int [] leftArray = new int[pivotIndex];
+        int [] rightArray = new int[(array.length - 1) - pivotIndex];
+        System.arraycopy(newArray, 0, leftArray, 0, pivotIndex);
+        System.arraycopy(newArray, pivotIndex + 1, rightArray, 0, rightArray.length);
+        leftArray = quickSort(leftArray);
+        rightArray = quickSort(rightArray);
+        int [] result = new int[leftArray.length + rightArray.length + 1];
+        System.arraycopy(leftArray, 0, result, 0, leftArray.length);
+        result[pivotIndex] = pivot;
+        System.arraycopy(rightArray, 0, result, pivotIndex + 1, rightArray.length);
+        return result;
+    }
 }
